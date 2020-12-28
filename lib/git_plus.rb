@@ -2,3 +2,4 @@
 
 require "git_plus/identity"
 require "git_plus/errors/base"
+require "git_plus/refinements/strings"
