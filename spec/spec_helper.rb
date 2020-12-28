@@ -11,7 +11,7 @@ require "refinements"
 
 using Refinements::Pathnames
 
-Pathname.require_tree __dir__, "support/shared_contexts/**/*.rb"
+Pathname.require_tree Bundler.root, "lib/git_plus/spec/shared_contexts/**/*.rb"
 
 RSpec.configure do |config|
   config.color = true
