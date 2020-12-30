@@ -2,19 +2,45 @@
 :toclevels: 5
 :figure-caption!:
 
-= Git Plus
+= Git+
 
 [link=https://www.alchemists.io/projects/code_quality]
 image::https://img.shields.io/badge/code_style-alchemists-brightgreen.svg[Alchemists Style Guide]
+[link=https://circleci.com/gh/bkuhlmann/git_plus]
+image::https://circleci.com/gh/bkuhlmann/git_plus.svg?style=svg[Circle CI Status]
+
+Provides a Ruby Object API to various Git commands so you can stay within your favorite language
+when working with Git. This project is an extraction of work original implemented within the
+following projects:
+
+* link:https://www.alchemists.io/projects/milestoner[Milestoner].
+* link:https://www.alchemists.io/projects/gemsmith[Gemsmith].
+* link:https://www.alchemists.io/projects/git-lint[Git Lint].
+
+Should you not find this project to your liking, you might be interested in similar projects that
+tackle this problem space:
+
+* link:https://github.com/ruby-git/ruby-git[Ruby Git].
+* link:https://github.com/libgit2/rugged[Rugged].
 
 toc::[]
 
 == Features
 
-== Screencasts
+Provides Ruby wrappers to Git commands such as:
+
+* link:https://git-scm.com/docs/git-branch[Branch].
+* link:https://git-scm.com/docs/git-config[Config].
+* link:https://git-scm.com/docs/git-log[Log].
+* link:https://git-scm.com/docs/git-rev-parse[Rev Parse].
+* link:https://git-scm.com/docs/git-tag[Tag].
+* link:https://git-scm.com/docs/git-interpret-trailers[Trailers].
+
+// == Screencasts
 
 == Requirements
 
+. link:https://git-scm.com[Git].
 . link:https://www.ruby-lang.org[Ruby].
 
 == Setup
@@ -27,6 +53,52 @@ bin/setup
 ----
 
 == Usage
+
+This project provides a common API within a single object via the `Repository` object. Example:
+
+[source,ruby]
+----
+repository = GitPlus::Repository.new
+
+repository.branch
+repository.branch_name
+repository.byebug
+repository.commits
+repository.config
+repository.config_get
+repository.config_remote?
+repository.config_set
+repository.log
+repository.rev_parse
+repository.tag
+repository.tag_exist?
+repository.tag_last
+repository.tag_local?
+repository.tag_push
+repository.tag_remote?
+repository.tag_sign
+repository.tag_unsign
+repository.tagged?
+repository.trailers
+repository.trailers_list
+repository.unsaved
+----
+
+Should you want to use individual commands instead of interacting with the `Repository` object, you
+can leverage any of the objects in the `Commands` namespace:
+
+[source,ruby]
+----
+branch = GitPlus::Commands::Branch.new
+config = GitPlus::Commands::Config.new
+log = GitPlus::Commands::Log.new
+rev_parse = GitPlus::Commands::RevParse.new
+tag = GitPlus::Commands::Tag.new
+trailers = GitPlus::Commands::Trailers.new
+----
+
+All of the above commands share the same
+link:https://www.alchemists.io/articles/interactor_pattern[Command Pattern] interface via `#call`.
 
 == Development
 
