@@ -2,4 +2,21 @@
 
 == 0.1.0 (2020-12-28)
 
-* Added initial implementation.
+* Added gem skeleton
+* Added RSpec shared contexts to library
+* Added Circle CI Git version
+* Added base error
+* Added string refinements
+* Added commit structure
+* Added branch command
+* Added config command
+* Added log command
+* Added rev-parse
+* Added tag command
+* Added trailers command
+* Added saved entry commit parser
+* Added saved history commit parser
+* Added unsaved entry commit parser
+* Added unsaved history commit parser
+* Added repository
+* Added project documentation
