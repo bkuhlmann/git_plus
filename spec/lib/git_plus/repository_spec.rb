@@ -4,7 +4,7 @@ require "spec_helper"
 
 RSpec.describe GitPlus::Repository do
   subject :repository do
-    described_class.new commands: described_class::COMMANDS.merge(proxy_tag: tag)
+    described_class.new delegates: described_class::DELEGATES.merge(delegate_tag: tag)
   end
 
   include_context "with Git repository"
