@@ -15,8 +15,16 @@ module GitPlus
         shell.capture3 environment, "git", "config", *arguments
       end
 
-      def get key, *arguments
-        call(*arguments, "--get", key).then { |stdout, _stderr, _status| stdout.chomp }
+      def get key, value = nil, *arguments
+        call(*arguments, "--get", key).then do |stdout, stderr, status|
+          if status.success?
+            stdout.chomp
+          elsif value
+            value
+          else
+            block_given? ? yield(stdout, stderr) : ""
+          end
+        end
       end
 
       def remote?

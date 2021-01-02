@@ -80,6 +80,25 @@ RSpec.describe GitPlus::Commands::Config do
     it "answers empty string when key is invalid" do
       expect(config.get("bogus")).to eq("")
     end
+
+    it "answers default value when key is invalid" do
+      expect(config.get("bogus", "fallback")).to eq("fallback")
+    end
+
+    it "yields to block when when key is invalid" do
+      value = config.get("bogus") { "test" }
+      expect(value).to eq("test")
+    end
+
+    it "yields standard output when when key is invalid" do
+      value = config.get("bogus") { |stdout| stdout }
+      expect(value).to eq("")
+    end
+
+    it "yields standard output and error when when key is invalid" do
+      value = config.get("bogus") { |stdout, stderr| stdout + stderr }
+      expect(value).to eq("error: key does not contain a section: bogus\n")
+    end
   end
 
   describe "#remote?" do
