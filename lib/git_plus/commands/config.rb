@@ -32,7 +32,9 @@ module GitPlus
       end
 
       def set key, value, *arguments
-        call(*arguments, "--add", key, value).then { |_stdout, _stderr, status| status.success? }
+        call(*arguments, "--add", key, value).then do |_stdout, stderr, status|
+          status.success? ? value : stderr
+        end
       end
 
       private

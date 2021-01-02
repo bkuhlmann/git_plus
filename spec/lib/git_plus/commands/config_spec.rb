@@ -128,28 +128,34 @@ RSpec.describe GitPlus::Commands::Config do
         end
       end
 
-      it "answers true when key is successfully set" do
+      it "answers value when key is successfully set" do
         git_repo_dir.change_dir do
-          expect(config.set(key, value)).to eq(true)
+          expect(config.set(key, value)).to eq(value)
         end
       end
     end
 
     context "when key doesn't exist" do
-      let(:key) { "user.text" }
-      let(:value) { "Text Example" }
+      let(:key) { "user.test" }
+      let(:value) { "example" }
 
-      it "create key value" do
+      it "sets key with value" do
         git_repo_dir.change_dir do
           config.set key, value
           expect(config.get(key)).to eq(value)
         end
       end
 
-      it "answers true when key is successfully set" do
+      it "answers value when key is successfully set" do
         git_repo_dir.change_dir do
-          expect(config.set(key, value)).to eq(true)
+          expect(config.set(key, value)).to eq("example")
         end
+      end
+    end
+
+    it "answers error when key is invalid" do
+      git_repo_dir.change_dir do
+        expect(config.set("bogus", "invalid")).to match(/error/)
       end
     end
   end
