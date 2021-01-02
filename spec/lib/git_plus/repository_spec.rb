@@ -75,10 +75,10 @@ RSpec.describe GitPlus::Repository do
     end
   end
 
-  describe "#config_remote?" do
+  describe "#config_origin?" do
     it "answers false when remote repository isn't defined" do
       git_repo_dir.change_dir do
-        expect(repository.config_remote?).to eq(true)
+        expect(repository.config_origin?).to eq(true)
       end
     end
   end

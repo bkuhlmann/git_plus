@@ -101,18 +101,18 @@ RSpec.describe GitPlus::Commands::Config do
     end
   end
 
-  describe "#remote?" do
+  describe "#origin?" do
     before { temp_dir.change_dir { `git init` } }
 
     it "answers true when remote repository is defined" do
       temp_dir.change_dir do
         `git config remote.origin.url git@github.com:test/example.git`
-        expect(config.remote?).to eq(true)
+        expect(config.origin?).to eq(true)
       end
     end
 
     it "answers false when remote repository is not defined" do
-      temp_dir.change_dir { expect(config.remote?).to eq(false) }
+      temp_dir.change_dir { expect(config.origin?).to eq(false) }
     end
   end
 

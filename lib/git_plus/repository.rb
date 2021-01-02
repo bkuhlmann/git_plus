@@ -23,7 +23,7 @@ module GitPlus
     def_instance_delegator :delegate_commits, :call, :commits
     def_instance_delegator :delegate_config, :call, :config
     def_instance_delegator :delegate_config, :get, :config_get
-    def_instance_delegator :delegate_config, :remote?, :config_remote?
+    def_instance_delegator :delegate_config, :origin?, :config_origin?
     def_instance_delegator :delegate_config, :set, :config_set
     def_instance_delegator :delegate_log, :call, :log
     def_instance_delegator :delegate_rev_parse, :call, :rev_parse

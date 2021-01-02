@@ -27,7 +27,7 @@ module GitPlus
         end
       end
 
-      def remote?
+      def origin?
         !get("remote.origin.url").empty?
       end
 
