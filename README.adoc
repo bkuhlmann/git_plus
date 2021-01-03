@@ -10,7 +10,7 @@ image::https://img.shields.io/badge/code_style-alchemists-brightgreen.svg[Alchem
 image::https://circleci.com/gh/bkuhlmann/git_plus.svg?style=svg[Circle CI Status]
 
 Provides a Ruby Object API to various Git commands so you can stay within your favorite language
-when working with Git. This project is an extraction of work original implemented within the
+when working with Git. This project is an extraction of work originally implemented within the
 following projects:
 
 * link:https://www.alchemists.io/projects/milestoner[Milestoner].
@@ -60,45 +60,158 @@ This project provides a common API within a single object via the `Repository` o
 ----
 repository = GitPlus::Repository.new
 
-repository.branch
-repository.branch_name
-repository.byebug
-repository.commits
-repository.config
-repository.config_get
-repository.config_remote?
-repository.config_set
-repository.log
-repository.rev_parse
-repository.tag
-repository.tag_exist?
-repository.tag_last
-repository.tag_local?
-repository.tag_push
-repository.tag_remote?
-repository.tag_sign
-repository.tag_unsign
-repository.tagged?
-repository.trailers
-repository.trailers_list
-repository.unsaved
+repository.branch          # Delegates to `GitPlus::Commands::Branch#call`.
+repository.branch_name     # Delegates to `GitPlus::Commands::Branch#name`.
+repository.commits         # Delegates to `GitPlus::Parsers::Commits::Saved::History#call`.
+repository.config          # Delegates to `GitPlus::Commands::Config#call`.
+repository.config_get      # Delegates to `GitPlus::Commands::Config#get`.
+repository.config_origin?  # Delegates to `GitPlus::Commands::Config#origin?`.
+repository.config_set      # Delegates to `GitPlus::Commands::Config#set`.
+repository.log             # Delegates to `GitPlus::Commands::Log#call`.
+repository.rev_parse       # Delegates to `GitPlus::Commands::RevParse#call`.
+repository.exist?          # Delegates to `GitPlus::Commands::RevParse#directory?`.
+repository.tag             # Delegates to `GitPlus::Commands::Tag#call`.
+repository.tag_exist?      # Delegates to `GitPlus::Commands::Tag#exist?`.
+repository.tag_last        # Delegates to `GitPlus::Commands::Tag#last`.
+repository.tag_local?      # Delegates to `GitPlus::Commands::Tag#local?`.
+repository.tag_push        # Delegates to `GitPlus::Commands::Tag#push`.
+repository.tag_remote?     # Delegates to `GitPlus::Commands::Tag#remote?`.
+repository.tag_sign        # Delegates to `GitPlus::Commands::Tag#sign`.
+repository.tag_unsign      # Delegates to `GitPlus::Commands::Tag#unsign`.
+repository.tagged?         # Delegates to `GitPlus::Commands::Tag#tagged?`.
+repository.trailers        # Delegates to `GitPlus::Commands::Trailers#call`.
+repository.trailers_list   # Delegates to `GitPlus::Commands::Trailers#list`.
+repository.unsaved         # Delegates to `GitPlus::Parsers::Commits::Unsaved::History#call`.
 ----
 
 Should you want to use individual commands instead of interacting with the `Repository` object, you
 can leverage any of the objects in the `Commands` namespace:
 
+All of the above commands share the same
+link:https://www.alchemists.io/articles/interactor_pattern[Command Pattern] interface via `#call`.
+
+=== link:https://git-scm.com/docs/git-branch[Branch]
+
+Handles branches.
+
 [source,ruby]
 ----
 branch = GitPlus::Commands::Branch.new
-config = GitPlus::Commands::Config.new
-log = GitPlus::Commands::Log.new
-rev_parse = GitPlus::Commands::RevParse.new
-tag = GitPlus::Commands::Tag.new
-trailers = GitPlus::Commands::Trailers.new
+
+# Accepts any argument you'd send to `git branch`.
+# Example: branch.call "--edit-description"
+stdout, stderr, status = branch.call
+
+# Answers branch name
+branch.name
 ----
 
-All of the above commands share the same
-link:https://www.alchemists.io/articles/interactor_pattern[Command Pattern] interface via `#call`.
+=== link:https://git-scm.com/docs/git-config[Config]
+
+Handles global and local configurations.
+
+[source,ruby]
+----
+config = GitPlus::Commands::Config.new
+
+# Accepts any argument you'd send to `git config`.
+# Example: branch.call "--add", "user.email", "test@example.com"
+stdout, stderr, status = config.call
+
+# Answers value for key with support for fallback value or block manipulation.
+config.get "user.email"
+config.get "user.email", "fallback"
+config.get("user.email") { |stdout| puts stdout }
+config.get("user.email") { |stdout, stderr| puts "#{stdout} - #{stderr}" }
+
+# Answers true or false if origin is defined.
+config.origin?
+
+# Sets configuration key and value.
+config.set
+----
+
+=== link:https://git-scm.com/docs/git-log[Log]
+
+Handles commit history.
+
+[source,ruby]
+----
+log = GitPlus::Commands::Log.new
+
+# Accepts any argument you'd send to `git log`.
+# Example: branch.call "--oneline", "0.1.0..HEAD"
+stdout, stderr, status = config.call
+----
+
+=== link:https://git-scm.com/docs/git-rev-parse[RevParse]
+
+Handles parsing of revision information.
+
+[source,ruby]
+----
+rev_parse = GitPlus::Commands::RevParse.new
+
+# Accepts any argument you'd send to `git rev-parse`.
+# Example: rev_parse.call "--quiet", "--verify", "release"
+stdout, stderr, status = rev_parse.call
+
+# Answers true or false if `.git` directory is found.
+rev_parse.directory?
+----
+
+=== link:https://git-scm.com/docs/git-tag[Tag]
+
+Handles the tagging/versioning of commits.
+
+[source,ruby]
+----
+tag = GitPlus::Commands::Tag.new
+
+# Accepts any argument you'd send to `git tag`.
+# Example: tag.call "--list"
+stdout, stderr, status = tag.call
+
+# Answers true or false base on whether local and remote tag exist.
+tag.exist? "0.1.0"
+
+# Answers last tag for repository.
+tag.last
+
+# Answers if local tag exists.
+tag.local? "0.1.0"
+
+# Pushes tags to remote repository.
+tag.push
+
+# Answers if remote tag exists.
+tag.remote? "0.1.0"
+
+# Creates a new, GPG signed, tag.
+tag.sign "0.1.0", "Version 0.1.0"
+
+# Answers true or false based on whether repository is tagged.
+tag.tagged?
+
+# Creates a new tag without any GPG signed verification.
+tag.unsign "0.1.0", "Version 0.1.0"
+----
+
+=== link:https://git-scm.com/docs/git-interpret-trailers[Trailers]
+
+Handles the adding or parsing of structured information in commit messages.
+
+[source,ruby]
+----
+trailers = GitPlus::Commands::Trailers.new
+
+# Accepts any argument you'd send to `git interpret-trailers`.
+# Example: trailers.call "--only-trailers"
+stdout, stderr, status = trailers.call
+
+# Answers an array of trailers, otherwise an empty array. Accepts same parameters as `#call`.
+trailers.list
+----
 
 == Development
 
