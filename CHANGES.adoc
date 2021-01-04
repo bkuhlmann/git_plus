@@ -1,5 +1,16 @@
 = Changes
 
+== 0.2.0 (2021-01-03)
+
+* Added README usage documentation - Brooke Kuhlmann
+* Added config get default value and optional block support - Brooke Kuhlmann
+* Updated config set to answer value or error based on success - Brooke Kuhlmann
+* Updated config to answer origin instead of remote - Brooke Kuhlmann
+* Updated repository to use delegate terminology - Brooke Kuhlmann
+* Updated to Gemsmith 15.0.0 - Brooke Kuhlmann
+* Updated to Git 2.30.0 - Brooke Kuhlmann
+* Updated to Git Lint 2.0.0 - Brooke Kuhlmann
+
 == 0.1.0 (2020-12-28)
 
 * Added gem skeleton
