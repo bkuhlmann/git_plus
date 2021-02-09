@@ -49,36 +49,20 @@ module GitPlus
 
     attr_reader :delegates
 
-    def delegate_branch
-      delegates.fetch __method__
-    end
+    def delegate_branch = delegates.fetch(__method__)
 
-    def delegate_commits
-      delegates.fetch __method__
-    end
+    def delegate_commits = delegates.fetch(__method__)
 
-    def delegate_config
-      delegates.fetch __method__
-    end
+    def delegate_config = delegates.fetch(__method__)
 
-    def delegate_log
-      delegates.fetch __method__
-    end
+    def delegate_log = delegates.fetch(__method__)
 
-    def delegate_rev_parse
-      delegates.fetch __method__
-    end
+    def delegate_rev_parse = delegates.fetch(__method__)
 
-    def delegate_tag
-      delegates.fetch __method__
-    end
+    def delegate_tag = delegates.fetch(__method__)
 
-    def delegate_trailers
-      delegates.fetch __method__
-    end
+    def delegate_trailers = delegates.fetch(__method__)
 
-    def delegate_unsaved
-      delegates.fetch __method__
-    end
+    def delegate_unsaved = delegates.fetch(__method__)
   end
 end

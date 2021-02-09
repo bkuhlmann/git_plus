@@ -10,9 +10,7 @@ module GitPlus
         @shell = shell
       end
 
-      def call *arguments
-        shell.capture3("git", "interpret-trailers", *arguments)
-      end
+      def call(*arguments) = shell.capture3("git", "interpret-trailers", *arguments)
 
       def list *arguments
         call(*arguments.prepend("--only-trailers")).then do |stdout, _stderr, status|

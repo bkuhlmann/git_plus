@@ -10,9 +10,7 @@ module GitPlus
         @shell = shell
       end
 
-      def call *arguments
-        shell.capture3("git", "log", *arguments)
-      end
+      def call(*arguments) = shell.capture3("git", "log", *arguments)
 
       private
 

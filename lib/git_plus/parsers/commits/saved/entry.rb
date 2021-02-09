@@ -18,21 +18,15 @@ module GitPlus
             @commit = commit.dup
           end
 
-          def call **attributes
-            commit.merge!(**attributes).tap { build }
-          end
+          def call(**attributes) = commit.merge!(**attributes).tap { build }
 
           private
 
           attr_reader :commit
 
-          def build
-            private_methods.grep(/\Astep_/).sort.each { |method| __send__ method }
-          end
+          def build = private_methods.grep(/\Astep_/).sort.each { |method| __send__ method }
 
-          def step_a_trailers
-            commit.trailers = commit.trailers.split "\n"
-          end
+          def step_a_trailers = commit.trailers = commit.trailers.split("\n")
 
           def step_b_trailers_index
             commit.trailers_index = commit.body
@@ -40,9 +34,7 @@ module GitPlus
                                           .index commit.trailers.first
           end
 
-          def step_c_body_lines
-            commit.body_lines = body_without_trailing_spaces
-          end
+          def step_c_body_lines = commit.body_lines = body_without_trailing_spaces
 
           def step_d_body_paragraphs
             commit.body_paragraphs = body_without_trailers.split("\n\n")

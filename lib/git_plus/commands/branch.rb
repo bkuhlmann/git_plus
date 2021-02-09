@@ -10,9 +10,7 @@ module GitPlus
         @shell = shell
       end
 
-      def call *arguments
-        shell.capture3("git", "branch", *arguments)
-      end
+      def call(*arguments) = shell.capture3("git", "branch", *arguments)
 
       def name
         shell.capture3("git", "rev-parse", "--abbrev-ref", "HEAD").then do |stdout, stderr, status|

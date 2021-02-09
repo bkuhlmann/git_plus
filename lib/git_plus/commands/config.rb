@@ -11,9 +11,7 @@ module GitPlus
         @shell = shell
       end
 
-      def call *arguments
-        shell.capture3 environment, "git", "config", *arguments
-      end
+      def call(*arguments) = shell.capture3(environment, "git", "config", *arguments)
 
       def get key, value = nil, *arguments
         call(*arguments, "--get", key).then do |stdout, stderr, status|
@@ -27,9 +25,7 @@ module GitPlus
         end
       end
 
-      def origin?
-        !get("remote.origin.url").empty?
-      end
+      def origin? = !get("remote.origin.url").empty?
 
       def set key, value, *arguments
         call(*arguments, "--add", key, value).then do |_stdout, stderr, status|

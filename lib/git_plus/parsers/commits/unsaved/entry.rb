@@ -35,21 +35,13 @@ module GitPlus
 
           attr_reader :sha, :commit, :repository
 
-          def build
-            private_methods.grep(/\Astep_/).sort.each { |method| __send__ method }
-          end
+          def build = private_methods.grep(/\Astep_/).sort.each { |method| __send__ method }
 
-          def step_a_author_name
-            commit.author_name = repository.config_get "user.name"
-          end
+          def step_a_author_name = commit.author_name = repository.config_get("user.name")
 
-          def step_b_author_email
-            commit.author_email = repository.config_get "user.email"
-          end
+          def step_b_author_email = commit.author_email = repository.config_get("user.email")
 
-          def step_c_subject
-            commit.subject = commit.message.split("\n").first
-          end
+          def step_c_subject = commit.subject = commit.message.split("\n").first
 
           # TODO: Remove leading and trailing empty lines.
           def step_d_body
@@ -87,9 +79,7 @@ module GitPlus
                                                           .reject { |line| line.start_with? "#" }
           end
 
-          def body_without_trailers
-            commit.body.sub(commit.trailers.join("\n"), "").chomp
-          end
+          def body_without_trailers = commit.body.sub(commit.trailers.join("\n"), "").chomp
         end
       end
     end

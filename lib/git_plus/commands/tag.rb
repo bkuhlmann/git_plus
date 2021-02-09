@@ -11,13 +11,9 @@ module GitPlus
         @shell = shell
       end
 
-      def call *arguments
-        shell.capture3 "git", "tag", *arguments
-      end
+      def call(*arguments) = shell.capture3("git", "tag", *arguments)
 
-      def exist? version
-        local?(version) || remote?(version)
-      end
+      def exist?(version) = local?(version) || remote?(version)
 
       def last
         shell.capture3("git", "describe", "--abbrev=0", "--tags", "--always")
@@ -30,9 +26,7 @@ module GitPlus
         end
       end
 
-      def push
-        shell.capture3 "git", "push", "--tags"
-      end
+      def push = shell.capture3("git", "push", "--tags")
 
       def remote? version
         shell.capture3("git", "ls-remote", "--tags", "origin", version)
@@ -41,17 +35,11 @@ module GitPlus
              end
       end
 
-      def sign version, body = ""
-        create version, body, %w[--sign]
-      end
+      def sign(version, body = "") = create(version, body, %w[--sign])
 
-      def tagged?
-        call.then { |stdout, _stderr, status| status.success? && !stdout.empty? }
-      end
+      def tagged? = call.then { |stdout, _stderr, status| status.success? && !stdout.empty? }
 
-      def unsign version, body = ""
-        create version, body, %w[--no-sign]
-      end
+      def unsign(version, body = "") = create(version, body, %w[--no-sign])
 
       private
 
