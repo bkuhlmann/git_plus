@@ -9,6 +9,9 @@ SimpleCov.start { enable_coverage :branch }
 require "git_plus"
 require "refinements"
 
+GC.auto_compact = true
+GC.verify_compaction_references double_heap: true, toward: :empty
+
 using Refinements::Pathnames
 
 Pathname.require_tree Bundler.root, "lib/git_plus/spec/shared_contexts/**/*.rb"
