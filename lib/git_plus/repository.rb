@@ -20,6 +20,7 @@ module GitPlus
 
     def_instance_delegator :delegate_branch, :call, :branch
     def_instance_delegator :delegate_branch, :name, :branch_name
+    def_instance_delegator :delegate_branch, :default, :branch_default
     def_instance_delegator :delegate_commits, :call, :commits
     def_instance_delegator :delegate_config, :call, :config
     def_instance_delegator :delegate_config, :get, :config_get

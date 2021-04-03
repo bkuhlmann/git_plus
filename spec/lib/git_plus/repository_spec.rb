@@ -31,6 +31,14 @@ RSpec.describe GitPlus::Repository do
     end
   end
 
+  describe "#branch_default" do
+    it "answers branch default" do
+      git_repo_dir.change_dir do
+        expect(repository.branch_default).to eq("main")
+      end
+    end
+  end
+
   describe "#commits" do
     let :proof do
       hash_including(

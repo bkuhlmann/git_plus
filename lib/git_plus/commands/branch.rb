@@ -10,6 +10,13 @@ module GitPlus
         @shell = shell
       end
 
+      def default
+        shell.capture3("git", "config", "init.defaultBranch").then do |stdout, _stderr, status|
+          name = String stdout.chomp
+          status.success? && !name.empty? ? name : "master"
+        end
+      end
+
       def call(*arguments) = shell.capture3("git", "branch", *arguments)
 
       def name

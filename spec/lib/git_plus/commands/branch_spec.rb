@@ -9,6 +9,28 @@ RSpec.describe GitPlus::Commands::Branch do
 
   using Refinements::Pathnames
 
+  describe "#default" do
+    it "answers main branch when defined" do
+      git_repo_dir.change_dir do
+        expect(branch.default).to eq("main")
+      end
+    end
+
+    it "answers master branch when undefined" do
+      git_repo_dir.change_dir do
+        `git config --add init.defaultBranch ""`
+        expect(branch.default).to eq("master")
+      end
+    end
+
+    it "answers custom branch when defined" do
+      git_repo_dir.change_dir do
+        `git config --add init.defaultBranch "source"`
+        expect(branch.default).to eq("source")
+      end
+    end
+  end
+
   describe "#call" do
     it "answers standard output, standard error, and status without arguments" do
       git_repo_dir.change_dir do
@@ -28,7 +50,7 @@ RSpec.describe GitPlus::Commands::Branch do
   end
 
   describe "#name" do
-    it "answers main branch name" do
+    it "answers default branch name" do
       git_repo_dir.change_dir do
         expect(branch.name).to eq("main")
       end
