@@ -13,7 +13,7 @@ RSpec.describe GitPlus::Commands::Branch do
     it "answers standard output, standard error, and status without arguments" do
       git_repo_dir.change_dir do
         expect(branch.call).to match(
-          array_including("* master\n", "", kind_of(Process::Status))
+          array_including("* main\n", "", kind_of(Process::Status))
         )
       end
     end
@@ -21,7 +21,7 @@ RSpec.describe GitPlus::Commands::Branch do
     it "answers standard output, standard error, and status with arguments" do
       git_repo_dir.change_dir do
         expect(branch.call("--list")).to match(
-          array_including("* master\n", "", kind_of(Process::Status))
+          array_including("* main\n", "", kind_of(Process::Status))
         )
       end
     end
@@ -30,7 +30,7 @@ RSpec.describe GitPlus::Commands::Branch do
   describe "#name" do
     it "answers main branch name" do
       git_repo_dir.change_dir do
-        expect(branch.name).to eq("master")
+        expect(branch.name).to eq("main")
       end
     end
 

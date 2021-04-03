@@ -17,7 +17,7 @@ RSpec.describe GitPlus::Repository do
     it "answers main branch" do
       git_repo_dir.change_dir do
         expect(repository.branch).to match(
-          array_including("* master\n", "", kind_of(Process::Status))
+          array_including("* main\n", "", kind_of(Process::Status))
         )
       end
     end
@@ -26,7 +26,7 @@ RSpec.describe GitPlus::Repository do
   describe "#branch_name" do
     it "answers branch name" do
       git_repo_dir.change_dir do
-        expect(repository.branch_name).to eq("master")
+        expect(repository.branch_name).to eq("main")
       end
     end
   end
