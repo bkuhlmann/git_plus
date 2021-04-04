@@ -61,6 +61,7 @@ This project provides a common API within a single object via the `Repository` o
 repository = GitPlus::Repository.new
 
 repository.branch          # Delegates to `GitPlus::Commands::Branch#call`.
+repository.branch_default  # Delegates to `GitPlus::Commands::Branch#default`.
 repository.branch_name     # Delegates to `GitPlus::Commands::Branch#name`.
 repository.commits         # Delegates to `GitPlus::Parsers::Commits::Saved::History#call`.
 repository.config          # Delegates to `GitPlus::Commands::Config#call`.
@@ -97,6 +98,9 @@ Handles branches.
 [source,ruby]
 ----
 branch = GitPlus::Commands::Branch.new
+
+# Answers branch default (via Git `init.defaultBranch` configuration).
+branch.default
 
 # Accepts any argument you'd send to `git branch`.
 # Example: branch.call "--edit-description"

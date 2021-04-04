@@ -1,5 +1,10 @@
 = Changes
 
+== 0.4.0 (2021-04-04)
+
+* Fixed specs to use Git main branch as default branch - Brooke Kuhlmann
+* Added default branch name - Brooke Kuhlmann
+
 == 0.3.0 (2021-02-20)
 
 * Added Ruby garbage collection compaction - Brooke Kuhlmann
