@@ -67,9 +67,7 @@ RSpec.describe GitPlus::Commands::Config do
     let(:key) { "user.name" }
 
     it "answers value without whitespace when key exists" do
-      git_repo_dir.change_dir do
-        expect(config.get(key)).to eq("Test User")
-      end
+      git_repo_dir.change_dir { expect(config.get(key)).to eq("Test User") }
     end
 
     it "answers empty string when key doesn't exist" do
@@ -129,9 +127,7 @@ RSpec.describe GitPlus::Commands::Config do
       end
 
       it "answers value when key is successfully set" do
-        git_repo_dir.change_dir do
-          expect(config.set(key, value)).to eq(value)
-        end
+        git_repo_dir.change_dir { expect(config.set(key, value)).to eq(value) }
       end
     end
 
@@ -147,16 +143,12 @@ RSpec.describe GitPlus::Commands::Config do
       end
 
       it "answers value when key is successfully set" do
-        git_repo_dir.change_dir do
-          expect(config.set(key, value)).to eq("example")
-        end
+        git_repo_dir.change_dir { expect(config.set(key, value)).to eq("example") }
       end
     end
 
     it "answers error when key is invalid" do
-      git_repo_dir.change_dir do
-        expect(config.set("bogus", "invalid")).to match(/error/)
-      end
+      git_repo_dir.change_dir { expect(config.set("bogus", "invalid")).to match(/error/) }
     end
   end
 end

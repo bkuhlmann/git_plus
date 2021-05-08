@@ -48,23 +48,17 @@ RSpec.describe GitPlus::Commands::Tag do
     end
 
     it "answers true when only remote tag exists" do
-      git_repo_dir.change_dir do
-        expect(tag.exist?("0.1.0")).to eq(true)
-      end
+      git_repo_dir.change_dir { expect(tag.exist?("0.1.0")).to eq(true) }
     end
 
     it "answers false when local and remote tags don't exist" do
-      git_repo_dir.change_dir do
-        expect(tag.exist?("0.0.0")).to eq(false)
-      end
+      git_repo_dir.change_dir { expect(tag.exist?("0.0.0")).to eq(false) }
     end
   end
 
   describe "#last" do
     it "answers SHA of first commit when no tags exist" do
-      git_repo_dir.change_dir do
-        expect(tag.last).to match(/[0-9a-f]{40}/)
-      end
+      git_repo_dir.change_dir { expect(tag.last).to match(/[0-9a-f]{40}/) }
     end
 
     it "answers last tag when tag exists" do
@@ -91,9 +85,7 @@ RSpec.describe GitPlus::Commands::Tag do
     end
 
     it "answers false with no tags" do
-      git_repo_dir.change_dir do
-        expect(tag.local?("0.1.0")).to eq(false)
-      end
+      git_repo_dir.change_dir { expect(tag.local?("0.1.0")).to eq(false) }
     end
   end
 
@@ -119,15 +111,11 @@ RSpec.describe GitPlus::Commands::Tag do
     let(:status) { instance_spy Process::Status, success?: true }
 
     it "answers true when tag exists" do
-      git_repo_dir.change_dir do
-        expect(tag.remote?("0.1.0")).to eq(true)
-      end
+      git_repo_dir.change_dir { expect(tag.remote?("0.1.0")).to eq(true) }
     end
 
     it "answers false when tag doesn't exist" do
-      git_repo_dir.change_dir do
-        expect(tag.remote?("0.2.0")).to eq(false)
-      end
+      git_repo_dir.change_dir { expect(tag.remote?("0.2.0")).to eq(false) }
     end
   end
 
@@ -153,9 +141,7 @@ RSpec.describe GitPlus::Commands::Tag do
     end
 
     it "answers false when tags don't exist" do
-      git_repo_dir.change_dir do
-        expect(tag.tagged?).to eq(false)
-      end
+      git_repo_dir.change_dir { expect(tag.tagged?).to eq(false) }
     end
   end
 

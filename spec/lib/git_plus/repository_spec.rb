@@ -25,17 +25,13 @@ RSpec.describe GitPlus::Repository do
 
   describe "#branch_name" do
     it "answers branch name" do
-      git_repo_dir.change_dir do
-        expect(repository.branch_name).to eq("main")
-      end
+      git_repo_dir.change_dir { expect(repository.branch_name).to eq("main") }
     end
   end
 
   describe "#branch_default" do
     it "answers branch default" do
-      git_repo_dir.change_dir do
-        expect(repository.branch_default).to eq("main")
-      end
+      git_repo_dir.change_dir { expect(repository.branch_default).to eq("main") }
     end
   end
 
@@ -77,17 +73,13 @@ RSpec.describe GitPlus::Repository do
     let(:key) { "user.name" }
 
     it "answers value" do
-      git_repo_dir.change_dir do
-        expect(repository.config_get(key)).to eq("Test User")
-      end
+      git_repo_dir.change_dir { expect(repository.config_get(key)).to eq("Test User") }
     end
   end
 
   describe "#config_origin?" do
     it "answers false when remote repository isn't defined" do
-      git_repo_dir.change_dir do
-        expect(repository.config_origin?).to eq(true)
-      end
+      git_repo_dir.change_dir { expect(repository.config_origin?).to eq(true) }
     end
   end
 
@@ -125,9 +117,7 @@ RSpec.describe GitPlus::Repository do
 
   describe "#exist?" do
     it "answers true when repository exists" do
-      git_repo_dir.change_dir do
-        expect(repository.exist?).to eq(true)
-      end
+      git_repo_dir.change_dir { expect(repository.exist?).to eq(true) }
     end
   end
 
@@ -230,9 +220,7 @@ RSpec.describe GitPlus::Repository do
     end
 
     it "answers unsaved commit" do
-      git_repo_dir.change_dir do
-        expect(repository.unsaved(path).to_h).to match(proof)
-      end
+      git_repo_dir.change_dir { expect(repository.unsaved(path).to_h).to match(proof) }
     end
   end
 end

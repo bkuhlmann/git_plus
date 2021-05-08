@@ -9,9 +9,7 @@ RSpec.describe GitPlus::Commands::Trailers do
 
   describe "#call" do
     it "answers standard output, standard error, and status without arguments" do
-      expect(trailers.call).to match(
-        array_including("\n", "", kind_of(Process::Status))
-      )
+      expect(trailers.call).to match(array_including("\n", "", kind_of(Process::Status)))
     end
 
     it "answers standard output, standard error, and status with file path" do

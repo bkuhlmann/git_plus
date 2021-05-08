@@ -23,15 +23,11 @@ RSpec.describe GitPlus::Commands::RevParse do
 
   describe "#directory?" do
     it "answers true when repository exists" do
-      git_repo_dir.change_dir do
-        expect(rev_parse.directory?).to eq(true)
-      end
+      git_repo_dir.change_dir { expect(rev_parse.directory?).to eq(true) }
     end
 
     it "answers false when repository doesn't exist" do
-      temp_dir.change_dir do
-        expect(rev_parse.directory?).to eq(false)
-      end
+      temp_dir.change_dir { expect(rev_parse.directory?).to eq(false) }
     end
   end
 end

@@ -11,9 +11,7 @@ RSpec.describe GitPlus::Commands::Branch do
 
   describe "#default" do
     it "answers main branch when defined" do
-      git_repo_dir.change_dir do
-        expect(branch.default).to eq("main")
-      end
+      git_repo_dir.change_dir { expect(branch.default).to eq("main") }
     end
 
     it "answers master branch when undefined" do
@@ -51,9 +49,7 @@ RSpec.describe GitPlus::Commands::Branch do
 
   describe "#name" do
     it "answers default branch name" do
-      git_repo_dir.change_dir do
-        expect(branch.name).to eq("main")
-      end
+      git_repo_dir.change_dir { expect(branch.name).to eq("main") }
     end
 
     it "answers feature branch name" do

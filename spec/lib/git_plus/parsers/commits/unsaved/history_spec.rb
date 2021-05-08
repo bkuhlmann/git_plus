@@ -44,9 +44,7 @@ RSpec.describe GitPlus::Parsers::Commits::Unsaved::History do
       end
 
       it "answers commit" do
-        git_repo_dir.change_dir do
-          expect(parser.call(path).to_h).to match(proof)
-        end
+        git_repo_dir.change_dir { expect(parser.call(path).to_h).to match(proof) }
       end
     end
 
@@ -84,9 +82,7 @@ RSpec.describe GitPlus::Parsers::Commits::Unsaved::History do
       end
 
       it "answers commit" do
-        git_repo_dir.change_dir do
-          expect(parser.call(path).to_h).to match(proof)
-        end
+        git_repo_dir.change_dir { expect(parser.call(path).to_h).to match(proof) }
       end
     end
 
@@ -121,9 +117,7 @@ RSpec.describe GitPlus::Parsers::Commits::Unsaved::History do
       end
 
       it "answers commit" do
-        git_repo_dir.change_dir do
-          expect(parser.call(path).to_h).to match(proof)
-        end
+        git_repo_dir.change_dir { expect(parser.call(path).to_h).to match(proof) }
       end
     end
 

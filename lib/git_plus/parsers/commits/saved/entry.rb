@@ -29,9 +29,7 @@ module GitPlus
           def step_a_trailers = commit.trailers = commit.trailers.split("\n")
 
           def step_b_trailers_index
-            commit.trailers_index = commit.body
-                                          .split("\n")
-                                          .index commit.trailers.first
+            commit.trailers_index = commit.body.split("\n").index commit.trailers.first
           end
 
           def step_c_body_lines = commit.body_lines = body_without_trailing_spaces
