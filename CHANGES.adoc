@@ -1,5 +1,10 @@
 = Changes
 
+== 0.5.1 (2021-07-05)
+
+* Fixed loading of main namespace - Brooke Kuhlmann
+* Removed punctionation from string refinement spec - Brooke Kuhlmann
+
 == 0.5.0 (2021-07-05)
 
 * Fixed Git config get to ignore global configuration if set - Brooke Kuhlmann

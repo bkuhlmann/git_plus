@@ -5,7 +5,7 @@ module GitPlus
   module Identity
     NAME = "git_plus"
     LABEL = "Git+"
-    VERSION = "0.5.0"
+    VERSION = "0.5.1"
     VERSION_LABEL = "#{LABEL} #{VERSION}"
   end
 end
