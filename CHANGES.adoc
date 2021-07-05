@@ -1,5 +1,18 @@
 = Changes
 
+== 0.5.0 (2021-07-05)
+
+* Fixed Git config get to ignore global configuration if set - Brooke Kuhlmann
+* Fixed Rubocop Layout/RedundantLineBreak issues - Brooke Kuhlmann
+* Added Zeitwerk gem - Brooke Kuhlmann
+* Added Zeitwerk loader - Brooke Kuhlmann
+* Added commit amend and prefix checks - Brooke Kuhlmann
+* Added string refinements for amend and prefix - Brooke Kuhlmann
+* Updated Code Quality URLs - Brooke Kuhlmann
+* Updated to Rubocop 1.14.0 - Brooke Kuhlmann
+* Updated to Ruby 3.0.1 - Brooke Kuhlmann
+* Refactored commit spec to avoid local variables - Brooke Kuhlmann
+
 == 0.4.0 (2021-04-04)
 
 * Fixed specs to use Git main branch as default branch - Brooke Kuhlmann
