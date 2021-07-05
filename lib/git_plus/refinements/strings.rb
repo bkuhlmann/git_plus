@@ -11,9 +11,13 @@ module GitPlus
           "#{count} #{self}#{suffix}"
         end
 
+        def amend? = match?(/\Aamend!\s/)
+
         def fixup? = match?(/\Afixup!\s/)
 
         def squash? = match?(/\Asquash!\s/)
+
+        def prefix? = amend? || fixup? || squash?
       end
     end
   end

@@ -39,6 +39,24 @@ RSpec.describe GitPlus::Refinements::Strings do
     end
   end
 
+  describe "#amend?" do
+    it "answers true when amend! prefix is included" do
+      expect("amend! Added test file.".amend?).to eq(true)
+    end
+
+    it "answers false when amend! prefix is excluded" do
+      expect("Added test file.".amend?).to eq(false)
+    end
+
+    it "answers false when amend! prefix is missing trailing space" do
+      expect("amend!Added test file.".amend?).to eq(false)
+    end
+
+    it "answers false when amend! is not a prefix" do
+      expect(" amend! Added test file.".amend?).to eq(false)
+    end
+  end
+
   describe "#fixup?" do
     it "answers true when fixup! prefix is included" do
       expect("fixup! Added test file.".fixup?).to eq(true)
@@ -72,6 +90,24 @@ RSpec.describe GitPlus::Refinements::Strings do
 
     it "answers false when squash! is not a prefix" do
       expect(" squash! Added test file.".squash?).to eq(false)
+    end
+  end
+
+  describe "#prefix?" do
+    it "answers true with amend! prefix" do
+      expect("amend! Added test file".prefix?).to eq(true)
+    end
+
+    it "answers true with fixup! prefix" do
+      expect("fixup! Added test file".prefix?).to eq(true)
+    end
+
+    it "answers true with squash! prefix" do
+      expect("squash! Added test file".prefix?).to eq(true)
+    end
+
+    it "answers false with normal prefix" do
+      expect("Added test file".prefix?).to eq(false)
     end
   end
 end
