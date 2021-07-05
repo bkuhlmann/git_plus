@@ -41,55 +41,55 @@ RSpec.describe GitPlus::Refinements::Strings do
 
   describe "#amend?" do
     it "answers true when amend! prefix is included" do
-      expect("amend! Added test file.".amend?).to eq(true)
+      expect("amend! Added test file".amend?).to eq(true)
     end
 
     it "answers false when amend! prefix is excluded" do
-      expect("Added test file.".amend?).to eq(false)
+      expect("Added test file".amend?).to eq(false)
     end
 
     it "answers false when amend! prefix is missing trailing space" do
-      expect("amend!Added test file.".amend?).to eq(false)
+      expect("amend!Added test file".amend?).to eq(false)
     end
 
     it "answers false when amend! is not a prefix" do
-      expect(" amend! Added test file.".amend?).to eq(false)
+      expect(" amend! Added test file".amend?).to eq(false)
     end
   end
 
   describe "#fixup?" do
     it "answers true when fixup! prefix is included" do
-      expect("fixup! Added test file.".fixup?).to eq(true)
+      expect("fixup! Added test file".fixup?).to eq(true)
     end
 
     it "answers false when fixup! prefix is excluded" do
-      expect("Added test file.".fixup?).to eq(false)
+      expect("Added test file".fixup?).to eq(false)
     end
 
     it "answers false when fixup! prefix is missing trailing space" do
-      expect("fixup!Added test file.".fixup?).to eq(false)
+      expect("fixup!Added test file".fixup?).to eq(false)
     end
 
     it "answers false when fixup! is not a prefix" do
-      expect(" fixup! Added test file.".fixup?).to eq(false)
+      expect(" fixup! Added test file".fixup?).to eq(false)
     end
   end
 
   describe "#squash?" do
     it "answers true when squash! prefix is included" do
-      expect("squash! Added test file.".squash?).to eq(true)
+      expect("squash! Added test file".squash?).to eq(true)
     end
 
     it "answers false when squash! prefix is excluded" do
-      expect("Added test file.".squash?).to eq(false)
+      expect("Added test file".squash?).to eq(false)
     end
 
     it "answers false when squash! prefix is missing trailing space" do
-      expect("squash!Added test file.".squash?).to eq(false)
+      expect("squash!Added test file".squash?).to eq(false)
     end
 
     it "answers false when squash! is not a prefix" do
-      expect(" squash! Added test file.".squash?).to eq(false)
+      expect(" squash! Added test file".squash?).to eq(false)
     end
   end
 
