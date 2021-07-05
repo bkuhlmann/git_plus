@@ -1,17 +1,6 @@
 # frozen_string_literal: true
 
-require "git_plus/identity"
-require "git_plus/errors/base"
-require "git_plus/refinements/strings"
-require "git_plus/commit"
-require "git_plus/commands/branch"
-require "git_plus/commands/config"
-require "git_plus/commands/log"
-require "git_plus/commands/rev_parse"
-require "git_plus/commands/tag"
-require "git_plus/commands/trailers"
-require "git_plus/parsers/commits/saved/entry"
-require "git_plus/parsers/commits/saved/history"
-require "git_plus/parsers/commits/unsaved/entry"
-require "git_plus/parsers/commits/unsaved/history"
-require "git_plus/repository"
+require "zeitwerk"
+
+loader = Zeitwerk::Loader.for_gem
+loader.setup
