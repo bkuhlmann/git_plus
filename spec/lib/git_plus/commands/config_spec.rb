@@ -71,7 +71,11 @@ RSpec.describe GitPlus::Commands::Config do
     end
 
     it "answers empty string when key doesn't exist" do
-      config = described_class.new environment: {"HOME" => git_repo_dir.to_s}
+      config = described_class.new environment: {
+        "GIT_CONFIG_GLOBAL" => "/dev/null",
+        "HOME" => git_repo_dir.to_s
+      }
+
       expect(config.get(key)).to eq("")
     end
 
