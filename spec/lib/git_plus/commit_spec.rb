@@ -27,6 +27,16 @@ RSpec.describe GitPlus::Commit do
     end
   end
 
+  describe "#amend?" do
+    it "answers true when subject includes amend! prefix" do
+      expect(described_class[subject: "amend! Added test file"].amend?).to eq(true)
+    end
+
+    it "answers false when subject excludes amend! prefix" do
+      expect(described_class[subject: "Added test file"].amend?).to eq(false)
+    end
+  end
+
   describe "#fixup?" do
     it "answers true when subject includes fixup! prefix" do
       commit = described_class[subject: "fixup! Added test file"]
@@ -48,6 +58,24 @@ RSpec.describe GitPlus::Commit do
     it "answers false when subject excludes squash! prefix" do
       commit = described_class[subject: "Added test file"]
       expect(commit.squash?).to eq(false)
+    end
+  end
+
+  describe "#prefix?" do
+    it "answers true when subject includes amend! prefix" do
+      expect(described_class[subject: "amend! Added test file"].prefix?).to eq(true)
+    end
+
+    it "answers true when subject includes fixup! prefix" do
+      expect(described_class[subject: "fixup! Added test file"].prefix?).to eq(true)
+    end
+
+    it "answers true when subject includes squash! prefix" do
+      expect(described_class[subject: "squash! Added test file"].prefix?).to eq(true)
+    end
+
+    it "answers false when subject's prefix is normal" do
+      expect(described_class[subject: "Added test file"].prefix?).to eq(false)
     end
   end
 end

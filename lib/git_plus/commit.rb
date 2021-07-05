@@ -18,8 +18,12 @@ module GitPlus
   ) do
     using Refinements::Strings
 
+    def amend? = subject.amend?
+
     def fixup? = subject.fixup?
 
     def squash? = subject.squash?
+
+    def prefix? = subject.prefix?
   end
 end
