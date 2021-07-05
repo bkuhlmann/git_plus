@@ -39,25 +39,21 @@ RSpec.describe GitPlus::Commit do
 
   describe "#fixup?" do
     it "answers true when subject includes fixup! prefix" do
-      commit = described_class[subject: "fixup! Added test file"]
-      expect(commit.fixup?).to eq(true)
+      expect(described_class[subject: "fixup! Added test file"].fixup?).to eq(true)
     end
 
     it "answers false when subject excludes fixup! prefix" do
-      commit = described_class[subject: "Added test file"]
-      expect(commit.fixup?).to eq(false)
+      expect(described_class[subject: "Added test file"].fixup?).to eq(false)
     end
   end
 
   describe "#squash?" do
     it "answers true when subject includes squash! prefix" do
-      commit = described_class[subject: "squash! Added test file"]
-      expect(commit.squash?).to eq(true)
+      expect(described_class[subject: "squash! Added test file"].squash?).to eq(true)
     end
 
     it "answers false when subject excludes squash! prefix" do
-      commit = described_class[subject: "Added test file"]
-      expect(commit.squash?).to eq(false)
+      expect(described_class[subject: "Added test file"].squash?).to eq(false)
     end
   end
 
